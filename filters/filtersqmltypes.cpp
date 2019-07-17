@@ -13,6 +13,8 @@ namespace qqsfpm {
 
 void registerFiltersTypes() {
     qmlRegisterUncreatableType<Filter>("SortFilterProxyModel", 0, 2, "Filter", "Filter is an abstract class");
+    // FilterContainerFilter exposed as FilterContainer
+    qmlRegisterUncreatableType<FilterContainerFilter>("SortFilterProxyModel", 0, 2, "FilterContainer", "FilterContainer is an abstract class");
     qmlRegisterType<ValueFilter>("SortFilterProxyModel", 0, 2, "ValueFilter");
     qmlRegisterType<IndexFilter>("SortFilterProxyModel", 0, 2, "IndexFilter");
     qmlRegisterType<RegExpFilter>("SortFilterProxyModel", 0, 2, "RegExpFilter");

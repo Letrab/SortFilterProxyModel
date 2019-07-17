@@ -3,8 +3,30 @@
 
 #include "filter.h"
 #include "filtercontainer.h"
+#include <QtQml>
 
 namespace qqsfpm {
+
+class FilterContainerFilter;
+
+class FilterContainerAttached : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(FilterContainerFilter* container READ container WRITE setContainer NOTIFY containerChanged)
+public:
+    FilterContainerAttached(QObject *parent);
+    ~FilterContainerAttached();
+
+    FilterContainerFilter* container() const;
+    void setContainer(FilterContainerFilter* container);
+
+Q_SIGNALS:
+    void containerChanged();
+
+private:
+    FilterContainerFilter* m_container;
+    Filter* m_parentFilter;
+};
 
 class FilterContainerFilter : public Filter, public FilterContainer {
     Q_OBJECT
@@ -17,6 +39,8 @@ public:
 
     void proxyModelCompleted(const QQmlSortFilterProxyModel& proxyModel) override;
 
+    static FilterContainerAttached* qmlAttachedProperties(QObject *object);
+
 Q_SIGNALS:
     void filtersChanged();
 
@@ -27,5 +51,7 @@ private:
 };
 
 }
+
+QML_DECLARE_TYPEINFO(qqsfpm::FilterContainerFilter, QML_HAS_ATTACHED_PROPERTIES)
 
 #endif // FILTERCONTAINERFILTER_H

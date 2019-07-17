@@ -29,6 +29,7 @@ OTHER_FILES += \
     tst_expressionrole.qml
 
 DISTFILES += \
+    tst_dynamicfilter.qml \
     tst_filtercontainers.qml \
     tst_regexprole.qml \
     tst_filtersorter.qml \
