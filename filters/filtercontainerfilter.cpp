@@ -4,13 +4,14 @@ namespace qqsfpm {
 
 FilterContainerAttached::FilterContainerAttached(QObject *parent)
     : QObject (parent), m_container(nullptr), m_parentFilter(qobject_cast<Filter*>(parent))
-{}
+{} // Cash parent filter pointer, because this object can be deleted before the Filter itself.
 
 FilterContainerAttached::~FilterContainerAttached()
 {
     if (m_parentFilter && m_container)
     {
-        m_container->removeFilter(m_parentFilter); // Remove filter from container. Cache filter, because can be deleted before this one is.
+        if(m_container->filters().indexOf(m_parentFilter) != -1)
+            m_container->removeFilter(m_parentFilter); // Remove filter from container
     }
 }
 
