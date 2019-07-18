@@ -32,11 +32,12 @@ void FilterContainerAttached::setContainer(FilterContainerFilter* container)
     auto filter = qobject_cast<Filter*>(parent());
     if (filter)
     {
-        if(m_container)
+        if (m_container)
         {
             m_container->removeFilter(filter); // Remove filter from old container
         }
-        container->appendFilter(filter); // Add filter to new container
+        if (container)
+            container->appendFilter(filter); // Add filter to new container
     }
 
     m_container = container;
