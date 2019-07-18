@@ -4,6 +4,7 @@
 #include "filter.h"
 #include "filtercontainer.h"
 #include <QtQml>
+#include <QPointer>
 
 namespace qqsfpm {
 
@@ -24,7 +25,7 @@ Q_SIGNALS:
     void containerChanged();
 
 private:
-    FilterContainerFilter* m_container;
+    QPointer<FilterContainerFilter> m_container;
     Filter* m_parentFilter;
 };
 
